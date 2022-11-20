@@ -20,8 +20,10 @@ module.exports = {
   },
   getPost: async (req, res) => {
     try {
-      const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user });
+      const post = await Post.findById(req.params.id)
+      const commentDB = await Post.db.collection("comments").find( { OGpost: req.params.id }).toArray();
+      res.render("post.ejs", { comments: commentDB, post: post, user: req.user });
+     
     } catch (err) {
       console.log(err);
     }
@@ -55,6 +57,21 @@ module.exports = {
       );
       console.log("Likes +1");
       res.redirect(`/post/${req.params.id}`);
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  addComment: async (req, res) => {
+    try {
+      await Post.db.collection("comments").insertOne(
+       {
+          comment: req.body.comment,
+          user: req.user.id,
+          OGpost: req.body.postID
+        }
+      );
+      console.log("Comment added!"),
+      res.redirect(`/post/${req.body.postID}`);
     } catch (err) {
       console.log(err);
     }

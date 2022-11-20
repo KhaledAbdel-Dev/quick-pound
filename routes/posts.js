@@ -11,6 +11,11 @@ router.post("/createPost", upload.single("file"), postsController.createPost);
 
 router.put("/likePost/:id", postsController.likePost);
 
+// router.put('/thumbup', postsController.likeComment);
+// router.put('/thumbdown', postsController.dislikeComment);
+
+router.post("/addComment", postsController.addComment);
+
 router.delete("/deletePost/:id", postsController.deletePost);
 
 module.exports = router;
