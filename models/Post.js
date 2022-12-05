@@ -1,34 +1,40 @@
 const mongoose = require("mongoose");
 
 const PostSchema = new mongoose.Schema({
-  title: {
+
+  year: {
     type: String,
     required: true,
   },
-  image: {
+  make: {
     type: String,
     require: true,
   },
-  cloudinaryId: {
+  cats: {
     type: String,
     require: true,
   },
-  caption: {
+  body: {
     type: String,
-    required: true,
+    require: true,
   },
-  likes: {
-    type: Number,
-    required: true,
+  drive: {
+    type: String,
+    require: true,
   },
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+  mileage: {
+    type: String,
+    require: true,
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
+  zip: {
+    type: String,
+    require: true
   },
+  pickup: {
+    type: String,
+    require: true
+  }
+
 });
 
-module.exports = mongoose.model("Post", PostSchema);
+module.exports = mongoose.model("cxQuoteInfo", PostSchema);

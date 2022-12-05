@@ -1,45 +1,74 @@
 <%- include('partials/header') -%>
+
+<div class="hidden md:block"> 
+  <!--<img class="absolute bg-cover bg-center w-full h-full inset-0" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/Hero%2008.png" alt="" />-->
+ 
+
 <div class="container">
   <div class="row mt-5">
       <div class="col-6">
-          <div>
-              <p><strong>User Name</strong>: <%= user.userName %></p>
-              <p><strong>Email</strong>: <%= user.email %></p>
-              <a href="/logout" class="col-3 btn btn-primary">Logout</a>
-          </div>
-          <div class="mt-5">
-            <h2>Add a post</h2>
-            <form action="/post/createPost" enctype="multipart/form-data" method="POST">
-              <div class="mb-3">
-                  <label for="title" class="form-label">Title</label>
-                  <input type="text" class="form-control" id="title" name="title">
+       
+        <% for (let i = 0; i < quoteY.length; i++) {%>
+   
+        <form action="/post/createInfo/<%= quoteY[i].id %>?_method=PUT" method="POST" data-multi-step class="multi-step-form">
+            <a href="/logout"><button role="button" class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-indigo-700 border rounded hover:bg-indigo-600 py-4 w-full">Logout</button></a>
+          
+           <h1>Great news <%= user.userName%>! </h1>
+           <p>We'd love to buy your car! We just need a little more information.</p>
+           <h2 id="quote"></h2>
+            <div class="card" data-step>
+              <h3 class="step-title">Vehicle Details</h3>
+              <!--<h6 class="step-title">Name on Title Will be the Name of the Payee On the Check!</h5>-->
+              <div class="form-group">
+                <label for="name">Name As It Appears On Title</label>
+                <input type="text" name="name" id="milage" placeholder="Full Name">
+                <label for="state">Title State</label>
+                <select name="state">
+                    <option value="">Select State</option>
+                    <option value="MA">Massachusetts</option>
+                    <option value="NY">New York</option>
+                    <option value="CT">Connecticut</option>
+                    <option value="RI">Rhode Island</option>
+                    <option value="ME">Maine</option>
+                    <option value="NH">New Hampshire</option>
+                    <option value="VT">Vermont</option>
+                    <option value="NJ">New Jersey</option>
+                </select>
               </div>
-              <div class="mb-3">
-                <label for="caption" class="form-label">Caption</label>
-                <textarea class="form-control" id="caption" name="caption"></textarea>
+              <div class="form-group">
+                <label for="color">Vehicle Color</label>
+                <select name="color">
+                    <option value="">Select Vehicle Color</option>
+                    <option value="Red">Red</option>
+                    <option value="Black">Black</option>
+                    <option value="White">White</option>
+                    <option value="Grey">Grey</option>
+                    <option value="Blue">Blue</option>
+                    <option value="Green">Green</option>
+                    <option value="Silver">Silver</option>
+                    <option value="Yellow">Yellow</option>
+                </select>
               </div>
-              <div class="mb-3">
-                <label for="imgUpload" class="form-label">Image</label>
-                <input type="file" class="form-control" id="imageUpload" name="file">
+              <button type="button" class="nextB" data-next>Next</button>
+            </div>
+            <div class="card" data-step>
+              <h3 class="step-title">Where Are We Picking Up From?</h3>
+              <div class="form-group">
+                <label for="pickup">Enter the Pickup Address</label>
+                <input type="text" name="pickup" placeholder="Street Address">
+              
+                <input type="text" name="pickup" placeholder="City">
+               
+                <input type="text" name="pickup" placeholder="State">
+                <label for="pickup">Enter a Contact Number</label>
+                <input type="text" name="pickup" placeholder="(123) 456-7890">
+                <button type="button" data-previous>Previous</button>
+                <button type="submit" id="trigger"> <a class="submitlink" href="/feed">Submit</a></button>
               </div>
-              <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
-            </form>
-          </div>
-      </div>
-      <div class="col-6">
-        <ul class="row list-unstyled">
-        <% for(var i=0; i<posts.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
-            <a href="/post/<%= posts[i]._id%>">
-              <img class="img-fluid" src="<%= posts[i].image%>">
-            </a>
-          </li>
-        <% } %>
-        </ul>
-        <div class="row justify-content-center mt-5">
-          <a class="btn btn-primary" href="/feed">Return to Feed</a>
-        </div>  
-      </div>  
+              
+          </form>
+          <%}%>
+        
     </div>
   </div>
 </div>

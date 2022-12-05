@@ -1,11 +1,133 @@
 <%- include('partials/header') -%>
+<div class="hidden md:block"> 
+    <img class="absolute bg-cover bg-center w-full h-full inset-0" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/Hero%2008.png" alt="" />
+</div>
+<div class="main">
+<div class="relative w-full h-full pb-10">
+  <div class="hidden md:block"> 
+      <img class="absolute bg-cover bg-center w-full h-full inset-0" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/Hero%2008.png" alt="" />
+  </div>
+  <nav class="f-f-l relative z-10">
+      <div class="relative z-10 mx-auto container w-full px-4 xl:px-0 lg:flex justify-between items-center py-11">
+          <div>
+              <a href="/"><img src="/imgs/logo.jpg" alt="logo" /></a>
+          </div>
+          <div class="flex items-center text-white text-base font-medium">
+              <a href="/login"><button class="px-6 py-3 bg-indigo-400 hover:bg-indigo-500 text-white text-base font-medium rounded-lg flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700">
+                  Login
+                  <img class="ml-4" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/large_typography_with_gradient_and_glass_effect_Svg5.svg" alt="arrow" />
+              </button></a>
+          </div>
+      </div>
+  </nav>
+  <div class="relative px-4 xl:px-0 container mx-auto md:flex items-center gap-8">
+      <div class="text-color w-full md:w-1/3 pt-16 lg:pt-32 xl:pt-12">
+          <h1 class="text-4xl md:text-4xl lg:text-6xl w-11/12 lg:w-11/12 xl:w-full xl:text-6xl text-gray-900 font-extrabold f-f-l">Quick bucks for your old truck</h1>
+          <div class="f-f-r text-base lg:text-base pb-20 sm:pb-0 pt-10 xl:pt-6">
+              <h2>Sign up to get a free, no-obligation offer today</h2>
+          </div>
+          <div class="lg:flex">       
+            <button class="hidden md:block hover:opacity-90 text-base w-full xl:text-base xl:w-6/12 mt-4 xl:mt-8 f-f-r py-4  bg-indigo-700 text-white font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 rounded-lg">Get an instant offer</button>
+          </div>
+      </div>
+      <form class="w-full mt-8 md:mt-0 object-fill md:w-2/3 md:-ml-4 lg:-ml-4 xl:ml-0" action="/post/takeQuote" method="POST" data-multi-step class="multi-step-form" alt="sample page" role="img">
+          <div class="card" data-step>
+            <h3 class="step-title">Tell Us About Your Car</h3>
+            <div class="form-group">
+              <label for="year">Year</label>
+              <select name="year" id="year">
+                  <option value="0">Select Vehicle Year</option>
+                  <option value=".25">1990-2000</option>
+                  <option value=".5">2001-2010</option>
+                  <option value=".75">2011-2016</option>
+                  <option value="1">2016-present</option>
+              </select>
+              <label for="make">Make & Model</label>
+              <select name="make" id="make">
+                  <option value="0">Most Popular Vehicles</option>
+                  <option value="22000">BMW 3 Series</option>
+                  <option value="28000">Chevrolet Silverado</option>
+                  <option value="30000">Ford F-150</option>
+                  <option value="18000">Honda Civic</option>
+                  <option value="16000">Hyundai Sonata</option>
+                  <option value="22000">Jeep Grand Cherokee</option>
+                  <option value="12000">Nissan Altima</option>
+                  <option value="15000">Toyota Corolla</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="milage">Mileage</label>
+              <input type="text" name="milage" id="milage" placeholder="xxxxx miles">
+            </div>
+            <button type="button" class="nextB" data-next>Next</button>
+          </div>
+          <div class="card" data-step>
+            <h3 class="step-title">Just a Couple More Questions</h3>
+            <div class="form-group">
+              <label for="cats" class="cats">Does It Have the Original CATs?</label>
+              <input type="radio" class="cats" name="cats" value=".6">
+              <label for="cats">Yes</label>
+              <input type="radio" class="cats"name="cats" value=".25">
+              <label for="cats">No</label>
+            </div>
+            <div class="form-group">
+              <label for="drive" class="drives">Is it Drivable?</label>
+              <input type="radio" class="drive" id="yes" name="drive" value="100">
+              <label for="drive">Starts & drives</label>
+              <input type="radio" class="drive" id="meh" name="drive" value="50">
+              <label for="drive">Starts but doesn't drive</label>
+              <input type="radio"class="drive" id="no" name="drive" value="0">
+              <label for="drive">Doesn't start</label>
+            </div>
+            <button type="button" data-previous>Previous</button>
+            <button type="button" class="nextB" data-next>Next</button>
+          </div>
+          <div class="card" data-step>
+            <h3 class="step-title">How Pretty Is She?</h3>
+            <div class="form-group">
+              <label for="body">Rate the Vehicle's Body Condition</label>
+              <input type="range" name="body" min="1" max="5" id="body">
+            </div>
+            <button type="button" data-previous>Previous</button>
+            <button type="button" class="nextB" data-next>Next</button>
+          </div>
+          <div class="card" data-step>
+            <h3 class="step-title">Finally, Where Are We Picking Up From?</h3>
+            <div class="form-group">
+              <label for="zip">Enter Your ZIP Code to Get Your Quote</label>
+              <input type="text" id="zip" name="zip" placeholder="ZIP Code">
+              <button type="button" data-previous>Previous</button>
+              <button value="submit" type="submit"> <a id="trigger" class="submitlink" href="/signup">Submit</a></button>
+            </div>
+      </form>
+       <a href="/signup"><button class="md:hidden hover:opacity-90 text-base w-full xl:text-base xl:w-6/12 mt-4 xl:mt-8 f-f-r py-4  bg-indigo-700 text-white font-bold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 rounded-lg">Get an instant offer</button></a>
+  </div>
+</div>
+</div>
 
-<main class="container">
-    <div class="row justify-content-around mt-5">
-        <a href="/login" class="col-3 btn btn-primary"> Login</a>
-        <a href="/signup" class="col-3 btn btn-primary"> Signup</a>
-    </div>
-</main>
+
+<style>
+  .top-100 {
+      animation: slideDown 0.5s ease-in-out; 
+  }
+
+  @keyframes slideDown {
+      0% {
+          top: -50%;
+      }
+
+      100% {
+          top: 0;
+      }
+  }
+
+  * {
+      outline: none !important;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      -webkit-tap-highlight-color: transparent;
+  }
+</style>
+
     
 
 <%- include('partials/footer') -%>
