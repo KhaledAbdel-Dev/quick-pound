@@ -1,19 +1,20 @@
 <%- include('partials/header') -%>
 
-<div class="hidden md:block"> 
-  <!--<img class="absolute bg-cover bg-center w-full h-full inset-0" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/Hero%2008.png" alt="" />-->
- 
-
-<div class="container">
-  <div class="row mt-5">
-      <div class="col-6">
-       
-        <% for (let i = 0; i < quoteY.length; i++) {%>
-   
-        <form action="/post/createInfo/<%= quoteY[i].id %>?_method=PUT" method="POST" data-multi-step class="multi-step-form">
-            <a href="/logout"><button role="button" class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-indigo-700 border rounded hover:bg-indigo-600 py-4 w-full">Logout</button></a>
+<div class="h-full bg-gradient-to-tl from-gray-400 to-indigo-900 w-full py-16 pb-60 px-4">
+  <div class="flex flex-col items-center justify-center">
+    
+     <a class="mr-0" href="/"><img class=" w-1/3" src="/imgs/logodone.png" alt="logo"></a>
+     <a href="/logout">
+      <button role="button" class="w-1/8 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-indigo-700 border rounded hover:bg-indigo-600 py-4 w-full">Logout</button>
+    </a>
+    
+      <div class="bg-white shadow rounded lg:w-1/3  md:w-1/2 w-full p-10 mt-16">
           
-           <h1>Great news <%= user.userName%>! </h1>
+          <% for (let i = 0; i < quoteY.length; i++) {%>
+   
+        <form action="/post/createInfo" method="POST" data-multi-step class="multi-step-form">
+          
+           <h1 class="focus:outline-none text-2xl font-extrabold leading-6 text-gray-800" >Great news <%= user.userName%>! </h1>
            <p>We'd love to buy your car! We just need a little more information.</p>
            <h2 id="quote"></h2>
             <div class="card" data-step>
@@ -68,8 +69,14 @@
               
           </form>
           <%}%>
-        
-    </div>
+
+         
+
+      </div>
+
+          
   </div>
 </div>
+
+
 <%- include('partials/footer') -%>
