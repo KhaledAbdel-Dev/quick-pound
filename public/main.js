@@ -2,20 +2,20 @@
 document.querySelector('#trigger').addEventListener('click', quoteCar)
 
 function quoteCar() {
-    const mileage = Number(document.querySelector('#milage').value)
-    const milageValue = Math.round((mileage - 50000) / 5000) * 50
-    const basePrice = Number(document.querySelector('#make').value)
-    const yearValue = Number(document.querySelector('#year').value)
-    const catsValue = Number(document.querySelector('input[name="cats"]:checked').value)
-    const bodyValue = Number(document.querySelector('#body').value) * 50
-    const driveValue = Number(document.querySelector('input[name="drive"]:checked').value)
-
-    console.log(milageValue, basePrice, yearValue, catsValue, bodyValue, driveValue)
-
-    let quotePrice = (basePrice * yearValue * catsValue) + bodyValue + driveValue - milageValue
-
-    console.log(quotePrice)
-    document.getElementById('quote').innerText = `We'll buy it from you for $ ${quotePrice}`
+    // const mileage = Number(document.querySelector('#milage').value)
+    // const milageValue = Math.round((mileage - 50000) / 5000) * 50
+    // const basePrice = Number(document.querySelector('#make').value)
+    // const yearValue = Number(document.querySelector('#year').value)
+    // const catsValue = Number(document.querySelector('input[name="cats"]:checked').value)
+    // const bodyValue = Number(document.querySelector('#body').value) * 50
+    // const driveValue = Number(document.querySelector('input[name="drive"]:checked').value)
+// 
+    // console.log(milageValue, basePrice, yearValue, catsValue, bodyValue, driveValue)
+// 
+    // let quotePrice = (basePrice * yearValue * catsValue) + bodyValue + driveValue - milageValue
+// 
+    // console.log(quotePrice)
+    // document.getElementById('quote').innerText = `We'll buy it from you for $ ${quotePrice}`
 
 }
 console.log('hello')

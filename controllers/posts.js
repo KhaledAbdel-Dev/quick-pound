@@ -4,11 +4,8 @@ const Post = require("../models/Post");
 module.exports = {
   getProfile: async (req, res) => {
     try {
-      const finalOffer = await Post.find({ cats: '.6' });
-      const finalOffers = await Post.find({ cats: '.25' });
 
-      res.render("profile.ejs", { quoteY: finalOffer, quoteN: finalOffers, user: req.user });
-      console.log('Saul Goodman')
+      res.render("profile.ejs", { user: req.user });
     } catch (err) {
       console.log(err);
     }
@@ -16,12 +13,25 @@ module.exports = {
 
   getFeed: async (req, res) => {
     try {
-      const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-      res.render("feed.ejs", { posts: posts });
+      const pickup = await Post.find().sort({ createdAt: "desc" }).lean();
+
+      res.render("feed.ejs", { cxLocation: pickup });
     } catch (err) {
       console.log(err);
     }
   },
+
+
+  getQuote: async (req, res) => {
+    try {
+      const finalOffer = await Post.find({ quoteStatus: 'approved' });
+      console.log(finalOffer)
+      res.render("quote.ejs", { quote: finalOffer, user: req.user });
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
 
   getPost: async (req, res) => {
     try {
@@ -34,22 +44,26 @@ module.exports = {
 
   takeQuote: async (req, res) => {
     console.log(req.body)
+    const milageValue = Math.round((Number(req.body.milage) - 50000) / 5000) * 50
+    let quotePrice = (Number(req.body.make) * Number(req.body.year) * Number(req.body.cats)) + Number(req.body.body) + Number(req.body.drive) - milageValue
     try {
       await Post.create({
-        year: req.body.year,
-        make: req.body.make,
-        cats: req.body.cats,
-        body: req.body.body,
-        drive: req.body.drive,
-        mileage: req.body.milage,
-        zip: req.body.zip
+        year: Number(req.body.year),
+        make: Number(req.body.make),
+        cats: Number(req.body.cats),
+        body: Number(req.body.body),
+        drive: Number(req.body.drive),
+        mileage: Number(req.body.milage),
+        zip: Number(req.body.zip),
+        quoteValue: quotePrice
       });
       console.log("Quote has been added!");
-      res.redirect("/");
+      res.redirect("/quote");
     } catch (err) {
       console.log(err);
     }
   },
+
   createInfo: async (req, res) => {
     console.log(req.body)
     try {
@@ -59,7 +73,7 @@ module.exports = {
           pickup: req.user.pickup
         }
       );
-      res.redirect("/profile");
+      res.redirect("/feed");
     } catch (err) {
       console.log(err);
     }

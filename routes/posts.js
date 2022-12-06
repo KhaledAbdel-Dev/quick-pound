@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const upload = require("../middleware/multer");
 const postsController = require("../controllers/posts");
 const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
@@ -11,7 +10,7 @@ router.post("/takeQuote", postsController.takeQuote);
 
 router.put("/createInfo/:id", postsController.createInfo);
 
-
+router.post("/getQuote", postsController.getQuote);
 
 router.delete("/deleteOrder/:id", postsController.deleteOrder);
 

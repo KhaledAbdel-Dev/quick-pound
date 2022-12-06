@@ -33,7 +33,16 @@ const PostSchema = new mongoose.Schema({
   pickup: {
     type: String,
     require: true
-  }
+  },
+  quoteStatus: {
+    type: String,
+    require: true,
+    default: 'approved'
+  },
+  quoteValue: {
+    type: Number,
+    require: true
+  },
 
 });
 

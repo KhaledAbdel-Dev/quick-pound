@@ -1,82 +1,89 @@
 <%- include('partials/header') -%>
 
-<div class="h-full bg-gradient-to-tl from-gray-400 to-indigo-900 w-full py-16 pb-60 px-4">
+
+<div class="h-full bg-gradient-to-tl from-gray-400 to-indigo-900 w-full py-16 pb-80 px-4">
   <div class="flex flex-col items-center justify-center">
-    
-     <a class="mr-0" href="/"><img class=" w-1/3" src="/imgs/logodone.png" alt="logo"></a>
-     <a href="/logout">
-      <button role="button" class="w-1/8 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-indigo-700 border rounded hover:bg-indigo-600 py-4 w-full">Logout</button>
-    </a>
-    
-      <div class="bg-white shadow rounded lg:w-1/3  md:w-1/2 w-full p-10 mt-16">
-          
-          <% for (let i = 0; i < quoteY.length; i++) {%>
-   
-        <form action="/post/createInfo" method="POST" data-multi-step class="multi-step-form">
-          
-           <h1 class="focus:outline-none text-2xl font-extrabold leading-6 text-gray-800" >Great news <%= user.userName%>! </h1>
-           <p>We'd love to buy your car! We just need a little more information.</p>
-           <h2 id="quote"></h2>
-            <div class="card" data-step>
-              <h3 class="step-title">Vehicle Details</h3>
-              <!--<h6 class="step-title">Name on Title Will be the Name of the Payee On the Check!</h5>-->
-              <div class="form-group">
-                <label for="name">Name As It Appears On Title</label>
-                <input type="text" name="name" id="milage" placeholder="Full Name">
-                <label for="state">Title State</label>
-                <select name="state">
-                    <option value="">Select State</option>
-                    <option value="MA">Massachusetts</option>
-                    <option value="NY">New York</option>
-                    <option value="CT">Connecticut</option>
-                    <option value="RI">Rhode Island</option>
-                    <option value="ME">Maine</option>
-                    <option value="NH">New Hampshire</option>
-                    <option value="VT">Vermont</option>
-                    <option value="NJ">New Jersey</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="color">Vehicle Color</label>
-                <select name="color">
-                    <option value="">Select Vehicle Color</option>
-                    <option value="Red">Red</option>
-                    <option value="Black">Black</option>
-                    <option value="White">White</option>
-                    <option value="Grey">Grey</option>
-                    <option value="Blue">Blue</option>
-                    <option value="Green">Green</option>
-                    <option value="Silver">Silver</option>
-                    <option value="Yellow">Yellow</option>
-                </select>
-              </div>
-              <button type="button" class="nextB" data-next>Next</button>
-            </div>
-            <div class="card" data-step>
-              <h3 class="step-title">Where Are We Picking Up From?</h3>
-              <div class="form-group">
-                <label for="pickup">Enter the Pickup Address</label>
-                <input type="text" name="pickup" placeholder="Street Address">
-              
-                <input type="text" name="pickup" placeholder="City">
-               
-                <input type="text" name="pickup" placeholder="State">
-                <label for="pickup">Enter a Contact Number</label>
-                <input type="text" name="pickup" placeholder="(123) 456-7890">
-                <button type="button" data-previous>Previous</button>
-                <button type="submit" id="trigger"> <a class="submitlink" href="/feed">Submit</a></button>
-              </div>
-              
-          </form>
-          <%}%>
+     <a href="/"><img class="w-1/3" src="/imgs/logodone.png" alt="logo"></a>
 
+      <div class="bg-white shadow rounded lg:w-1/2  md:w-1/2 w-1/2  p-10 mt-16">
          
+          <div class="row justify-content-center">
+            
+            <form class="mr-0" action="/post/takeQuote" method="POST" data-multi-step class="multi-step-form" alt="sample page" role="img">
+              <div class="card" data-step>
+                <h3 class="step-title">Tell Us About Your Car</h3>
+                <div class="form-group">
+                  <label for="year">Year</label>
+                  <select name="year" id="year">
+                      <option value="0">Select Vehicle Year</option>
+                      <option value=".25">1990-2000</option>
+                      <option value=".5">2001-2010</option>
+                      <option value=".75">2011-2016</option>
+                      <option value="1">2016-present</option>
+                  </select>
+                  <label for="make">Make & Model</label>
+                  <select name="make" id="make">
+                      <option value="0">Most Popular Vehicles</option>
+                      <option value="22000">BMW 3 Series</option>
+                      <option value="28000">Chevrolet Silverado</option>
+                      <option value="30000">Ford F-150</option>
+                      <option value="18000">Honda Civic</option>
+                      <option value="16000">Hyundai Sonata</option>
+                      <option value="22000">Jeep Grand Cherokee</option>
+                      <option value="12000">Nissan Altima</option>
+                      <option value="15000">Toyota Corolla</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="milage">Mileage</label>
+                  <input type="text" name="milage" id="milage" placeholder="xxxxx miles">
+                </div>
+                <button type="button" class="nextB" data-next>Next</button>
+              </div>
+              <div class="card" data-step>
+                <h3 class="step-title">Just a Couple More Questions</h3>
+                <div class="form-group">
+                  <label for="cats" class="cats">Does It Have the Original CATs?</label>
+                  <input type="radio" class="cats" name="cats" value=".6">
+                  <label for="cats">Yes</label>
+                  <input type="radio" class="cats"name="cats" value=".25">
+                  <label for="cats">No</label>
+                </div>
+                <div class="form-group">
+                  <label for="drive" class="drives">Is it Drivable?</label>
+                  <input type="radio" class="drive" id="yes" name="drive" value="100">
+                  <label for="drive">Starts & drives</label>
+                  <input type="radio" class="drive" id="meh" name="drive" value="50">
+                  <label for="drive">Starts but doesn't drive</label>
+                  <input type="radio"class="drive" id="no" name="drive" value="0">
+                  <label for="drive">Doesn't start</label>
+                </div>
+                <button type="button" data-previous>Previous</button>
+                <button type="button" class="nextB" data-next>Next</button>
+              </div>
+              <div class="card" data-step>
+                <h3 class="step-title">How Pretty Is She?</h3>
+                <div class="form-group">
+                  <label for="body">Rate the Vehicle's Body Condition</label>
+                  <input type="range" name="body" min="1" max="5" id="body">
+                </div>
+                <button type="button" data-previous>Previous</button>
+                <button type="button" class="nextB" data-next>Next</button>
+              </div>
+              <div class="card" data-step>
+                <h3 class="step-title">Finally, Where Are We Picking Up From?</h3>
+                <div class="form-group">
+                  <label for="zip">Enter Your ZIP Code to Get Your Quote</label>
+                  <input type="text" id="zip" name="zip" placeholder="ZIP Code">
+                  <button type="button" data-previous>Previous</button>
+                  <button value="submit" type="submit"> <a id="trigger" class="submitlink" href="/quote">Submit</a></button>
+                </div>
+          </form>
 
-      </div>
-
-          
+           
   </div>
 </div>
+
 
 
 <%- include('partials/footer') -%>
