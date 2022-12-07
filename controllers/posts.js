@@ -1,10 +1,8 @@
-const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
 
 module.exports = {
   getProfile: async (req, res) => {
     try {
-
       res.render("profile.ejs", { user: req.user });
     } catch (err) {
       console.log(err);
@@ -13,9 +11,10 @@ module.exports = {
 
   getFeed: async (req, res) => {
     try {
-      const pickup = await Post.find().sort({ createdAt: "desc" }).lean();
-
-      res.render("feed.ejs", { cxLocation: pickup });
+      const finalOffer = await Post.find({ quoteStatus: 'approved' });
+      const acceptedOffer = await Post.db.collection("comments").find
+      console.log(finalOffer)
+      res.render("feed.ejs", { quote: finalOffer, user: req.user });
     } catch (err) {
       console.log(err);
     }
@@ -25,7 +24,7 @@ module.exports = {
   getQuote: async (req, res) => {
     try {
       const finalOffer = await Post.find({ quoteStatus: 'approved' });
-      console.log(finalOffer)
+
       res.render("quote.ejs", { quote: finalOffer, user: req.user });
     } catch (err) {
       console.log(err);
@@ -33,19 +32,10 @@ module.exports = {
   },
 
 
-  getPost: async (req, res) => {
-    try {
-      const post = await Post.findById(req.params.id)
-      res.render("post.ejs", { post: post, user: req.user });
-    } catch (err) {
-      console.log(err);
-    }
-  },
-
   takeQuote: async (req, res) => {
     console.log(req.body)
     const milageValue = Math.round((Number(req.body.milage) - 50000) / 5000) * 50
-    let quotePrice = (Number(req.body.make) * Number(req.body.year) * Number(req.body.cats)) + Number(req.body.body) + Number(req.body.drive) - milageValue
+    let quotePrice = (Number(req.body.make) * Number(req.body.year) * Number(req.body.cats)) + (Number(req.body.body) * 50) + Number(req.body.drive) - milageValue
     try {
       await Post.create({
         year: Number(req.body.year),
@@ -67,26 +57,33 @@ module.exports = {
   createInfo: async (req, res) => {
     console.log(req.body)
     try {
-      await Post.findOneAndUpdate(
-        { _id: req.params.id },
+      await Post.db.collection("acceptQuote").insertOne(
        {
-          pickup: req.user.pickup
+          pickup: req.body.pickup,
+          phoneNumber: req.body.number,
+          name: req.body.name
         }
       );
       res.redirect("/feed");
     } catch (err) {
       console.log(err);
     }
-  },
+  }
 
-
-  deleteOrder: async (req, res) => {
-    try {
-      await Post.remove({ _id: req.params.id });
-      console.log("Deleted order!");
-      res.redirect("/profile");
-    } catch (err) {
-      res.redirect("/profile");
-    }
-  },
-};
+  // createInfo: async (req, res) => {
+  //   console.log(req.body)
+  //   try {
+  //     await Post.findOneAndUpdate(
+  //       { _id: req.params.id },
+  //      {
+  //         pickup: req.user.pickup,
+  //         phoneNumber: req.body.number,
+  //         name: req.body.name
+  //       }
+  //     );
+  //     res.redirect("/feed");
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // }
+}

@@ -43,6 +43,10 @@ const PostSchema = new mongoose.Schema({
     type: Number,
     require: true
   },
+  phoneNumber: {
+    type: String,
+    require: true
+  }
 
 });
 
