@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const postsController = require("../controllers/posts");
 
-//Post Routes - simplified for now
 
 router.post("/takeQuote", postsController.takeQuote);
 

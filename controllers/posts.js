@@ -1,9 +1,9 @@
 const Post = require("../models/Post");
 
 module.exports = {
-  getProfile: async (req, res) => {
+  getConsult: async (req, res) => {
     try {
-      res.render("profile.ejs", { user: req.user });
+      res.render("consult.ejs", { user: req.user });
     } catch (err) {
       console.log(err);
     }
@@ -54,36 +54,21 @@ module.exports = {
     }
   },
 
-  createInfo: async (req, res) => {
-    console.log(req.body)
-    try {
-      await Post.db.collection("acceptQuote").insertOne(
-       {
-          pickup: req.body.pickup,
-          phoneNumber: req.body.number,
-          name: req.body.name
-        }
-      );
-      res.redirect("/feed");
-    } catch (err) {
-      console.log(err);
-    }
-  }
 
-  // createInfo: async (req, res) => {
-  //   console.log(req.body)
-  //   try {
-  //     await Post.findOneAndUpdate(
-  //       { _id: req.params.id },
-  //      {
-  //         pickup: req.user.pickup,
-  //         phoneNumber: req.body.number,
-  //         name: req.body.name
-  //       }
-  //     );
-  //     res.redirect("/feed");
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
+ createInfo: async (req, res) => {
+   console.log(req.body)
+   try {
+     await Post.findOneAndUpdate(
+       { _id: req.params.id },
+      {
+         pickup: req.user.pickup,
+         phoneNumber: req.body.number,
+         name: req.body.name
+       }
+     );
+     res.redirect("/feed");
+   } catch (err) {
+     console.log(err);
+   }
+ }
 }
